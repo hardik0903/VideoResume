@@ -1,8 +1,6 @@
 fastapi==0.95.2
 uvicorn[standard]==0.22.0
-numpy==1.26.0
+numpy==1.23.5
 opencv-python==4.8.0.74
-# pick tensorflow flavor you installed; using 'tensorflow' will pick cpu+gpu depending on system
-tensorflow==2.12.0
-# If you want CPU-only smaller wheel:
-# tensorflow-cpu==2.12.0
+tensorflow-cpu==2.12.0
+protobuf==3.20.3
