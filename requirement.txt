@@ -1,0 +1,5 @@
+fastapi
+uvicorn[standard]
+numpy
+opencv-python
+tensorflow>=2.4    # match TF version used to train your weights
