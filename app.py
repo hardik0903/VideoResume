@@ -17,7 +17,7 @@ WEIGHTS_PATH = Path(os.environ.get("MESO_WEIGHTS_PATH", str(default_weights))).r
 
 IMG_SIZE = 256
 NUM_FRAMES = 50
-FAKE_THRESHOLD = 0.33  # avg score below this -> fake
+FAKE_THRESHOLD = 0.3  # avg score below this -> fake
 
 _model_instance = None
 
