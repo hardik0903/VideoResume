@@ -1,9 +1,8 @@
-fastapi==0.95.2
-uvicorn==0.22.0
-python-multipart==0.0.9
-numpy==1.23.5
-opencv-python==4.8.0.74
-tensorflow-cpu==2.12.0
-h5py==3.8.0
-scipy==1.10.1
-pydantic==1.10.24
+fastapi
+uvicorn[standard]
+python-multipart
+tensorflow
+numpy
+librosa
+moviepy>=2.0.0
+opencv-python-headless
