@@ -1,7 +1,7 @@
 fastapi
 uvicorn[standard]
 python-multipart
-tensorflow
+tensorflow-cpu
 numpy
 librosa
 moviepy>=2.0.0
