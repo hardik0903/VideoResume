@@ -27,11 +27,12 @@ app = FastAPI(title="Ascraa - Combined Deepfake Detection",
 
 # Paths
 SCRIPT_DIR = Path(__file__).resolve().parent
-# Looks for weights/Meso4_DF.h5 relative to this script
-VIDEO_WEIGHTS_PATH = Path(os.environ.get("MESO_WEIGHTS_PATH", str(SCRIPT_DIR / "weights" / "Meso4_DF.h5"))).resolve()
+
+# CHANGED: Now looks for Meso4_DF.h5 directly in the root folder
+VIDEO_WEIGHTS_PATH = Path(os.environ.get("MESO_WEIGHTS_PATH", str(SCRIPT_DIR / "Meso4_DF.h5"))).resolve()
 AUDIO_MODEL_PATH = "audio_classifier.h5"
 
-# Audio Processing Constants (Architecture specific, unlikely to change per request)
+# Audio Processing Constants
 AUDIO_SR = 22050
 N_MELS = 128
 TARGET_FRAMES = 109
@@ -70,6 +71,7 @@ def load_video_model():
         return None
     
     if not VIDEO_WEIGHTS_PATH.exists():
+        # Helpful error message to debug deployment paths
         print(f"Error: Video weights not found at {VIDEO_WEIGHTS_PATH}")
         return None
 
@@ -202,8 +204,6 @@ async def check_deepfake(
                 scores_list = np.asarray(preds).reshape(-1).tolist()
                 avg_score = float(np.mean(scores_list))
                 
-                # LOGIC: Based on your previous code "is_true = avg_score > FAKE_THRESHOLD"
-                # This assumes High Score = Real.
                 is_video_true = avg_score > video_threshold
 
                 response_data["video_analysis"] = {
@@ -240,9 +240,6 @@ async def check_deepfake(
                     else:
                         aud_score = float(audio_preds.flatten()[0])
                     
-                    # LOGIC: Usually Audio models output "Probability of Fake".
-                    # If Score > Threshold => Fake.
-                    # Therefore is_true => Score < Threshold.
                     is_audio_true = aud_score < audio_threshold
                     
                     response_data["audio_analysis"] = {
